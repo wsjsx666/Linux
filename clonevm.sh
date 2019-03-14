@@ -12,7 +12,7 @@ read -p '所需大小(单位为G,默认20G):' m
 qemu-img create -b node.qcow2 -f qcow2 ${n1}.img ${m:-20}G
 cd /etc/libvirt/qemu
 sed  "s/node/${n1}/" node.xml > ${n1}.xml
-sed  -i "/<source file/s/node/${n1}/" ${n1}.xml
+#sed  -i "/<source file/s/node/${n1}/" ${n1}.xml
 virsh define ${n1}.xml
 virsh dominfo ${n1}
 sleep 2
@@ -28,7 +28,7 @@ cd /var/lib/libvirt/images
 qemu-img create -b node.qcow2 -f qcow2 ${a}${i}.img ${m:-20}G
 cd /etc/libvirt/qemu
 sed  "s/node/${a}${i}/" node.xml > ${a}${i}.xml
-sed  -i "/<source file/s/node/${a}${i}/"    ${a}${i}.xml
+#sed  -i "/<source file/s/node/${a}${i}/"    ${a}${i}.xml
 virsh define ${a}${i}.xml
 done
 virsh list --all
