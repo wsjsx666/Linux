@@ -12,7 +12,8 @@ sed -i '/\[mysqld\]/a validate_password_policy=0\nvalidate_password_length=6' /e
 systemctl restart mysqld
 systemctl enable mysqld
 expect<<EOF
-spawn mysql -uroot -p$p
+spawn mysql -uroot -p
+expect "password:" {send "$p\r"}
 expect "mysql>" {send "alter user root@localhost identified by '123456';\r"}
 expect "mysql>" {send "exit\r"}
 expect "#"        {send "exit\r" }
